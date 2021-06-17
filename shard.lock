@@ -4,6 +4,10 @@ shards:
     git: https://github.com/straight-shoota/crinja.git
     version: 0.7.0
 
+  front_matter:
+    git: https://github.com/chris-huxtable/front_matter.cr.git
+    version: 0.1.1
+
   markd:
     git: https://github.com/icyleaf/markd.git
     version: 0.4.0
