@@ -5,7 +5,7 @@ Under my benchmarks (rendering this readme a 100 times), a large site can be gen
 
 ## Build
 
-To build run `shards build`, if it asks you to run `shards update` you have to run with the `--ingore-crystal-version` flag because `front_matter` has not been updated to have crystal 1.0.0 in its `shards.yml`  
+To build run `shards build --release`, if it asks you to run `shards update` you have to run with the `--ingore-crystal-version` flag because `front_matter` has not been updated to have crystal 1.0.0 in its `shards.yml`  
 The compiled binary will be in `/bin`
 
 ## File formating
