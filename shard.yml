@@ -1,11 +1,10 @@
 name: monis
 version: 0.1.0
 
-# authors:
-#   - name <email@example.com>
-
+authors:
+  - l3gacy <l3gacy.b3ta@gmail.com>
 description: |
-  Monis is a static site generator that I have built using markdown and jinja themes
+  Monis is a hyper-fast light-weight SSG written in Crystal.
 
 dependencies:
   markd:
@@ -15,8 +14,11 @@ dependencies:
   front_matter:
     github: chris-huxtable/front_matter.cr
 
-# development_dependencies:
-#   webmock:
-#     github: manastech/webmock.cr
 
-# license: MIT
+targets:
+  monis:
+    main: src/monis.cr
+
+crystal: 1.0.0
+
+license: UNLICENSE

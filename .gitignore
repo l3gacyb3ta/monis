@@ -1,5 +1,8 @@
-lib
-content
-out
-static
-main
+/docs
+/lib
+/bin
+/.shards
+*.dwarf
+/content
+/static
+/out

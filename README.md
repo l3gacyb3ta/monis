@@ -1,10 +1,8 @@
 # Monis
 Monis is a hyper-fast light-weight SSG written in Crystal.
-## File structure
-`/content`: Anything here gets rendered  
-`/static`: These files just get copied over to `/out/static`  
-`/theme`: Currently only `index.html.js` gets used in this, but this is the Jinja2 template for the website.  
-`/out`: This is the output of the generator once it has been run !!DONT STORE ANYTHING IMPORTANT HERE IT GETS WIPED ON EACH RUN!!  
+## Build
+
+
 ## File formating
 Template:
 ```
@@ -16,3 +14,21 @@ permalink: "/index"
 Hello and welcome!
 ```
 The frontmatter contains the permalink and the title, and the page content is after the frontmatter
+
+## File structure
+`/content`: Anything here gets rendered  
+`/static`: These files just get copied over to `/out/static`  
+`/theme`: Currently only `index.html.js` gets used in this, but this is the Jinja2 template for the website.  
+`/out`: This is the output of the generator once it has been run !!DONT STORE ANYTHING IMPORTANT HERE IT GETS WIPED ON EACH RUN!!  
+
+## Contributing
+
+1. Fork it (<https://github.com/your-github-user/monis/fork>)
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
+
+## Contributors
+
+- [l3gacy](https://github.com/your-github-user) - creator and maintainer
