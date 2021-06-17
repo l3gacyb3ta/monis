@@ -3,19 +3,21 @@ require "crinja"
 require "markd"
 require "yaml"
 
+if Dir.exists? "out"
+  puts "Cleaning old generation"
+  system "rm -rf out"
+end
+
 # ---------------- Jinja template engine setup ----------------
 env = Crinja.new
 env.loader = Crinja::Loader::FileSystemLoader.new("theme/")
 
-path = Dir.new "content"
-files = [] of String
+rawfiles = Dir.glob("content/**/*") # Files that are under content
+files = [] of String                # An empty Array of filenames without directories
 
-# Content descovery
-path.each do |itered|
-  if [".", ".."].includes? itered
-  else
-    puts "Found " + itered
-    files.push "content/" + itered
+rawfiles.each do |filename|
+  if filename.ends_with? ".md"
+    files.push filename # Add the file if it of a type we support
   end
 end
 
@@ -28,6 +30,7 @@ files.each do |filename|
   FrontMatter.open(filename) { |front_matter, content_io|
     data = YAML.parse front_matter
     title = data["title"].as_s
+    permalink = data["permalink"].as_s
 
     rawmd = content_io.gets_to_end
     content = Markd.to_html(rawmd)
@@ -39,13 +42,37 @@ files.each do |filename|
     rendered_page = template.render({"content" => content, "title" => title})
     # write out rendered_page
 
-    outputname = filename.split("/")[1].split(".")[0] + ".html"
+    # create directories for page
+    subs = permalink.split("/")
+    count = 0
 
-    File.write("out/" + outputname, rendered_page)
+    subs.each do |dirname|
+      if dirname == subs[-1]
+      else
+        recreateddir = "out" + subs[0..count].join('/')
+        if Dir.exists? recreateddir
+        else
+          system "mkdir " + recreateddir
+        end
+      end
+      count = count + 1
+    end
 
-    puts "Generated " + outputname
+    if Dir.exists? "out"
+      File.write("out" + permalink + ".html", rendered_page)
+    else
+      system "mkdir out"
+      File.write("out" + permalink + ".html", rendered_page)
+    end
+    puts "Generated " + permalink + ".html"
   }
-  
 end
 
 puts "HTML Generation finished!"
+
+puts "Tranfering static content"
+if Dir.exists? "static"
+  system "mkdir out/static"
+  system "cp static/* out/static"
+end
+puts "Static content moved"
