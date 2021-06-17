@@ -1,7 +1,10 @@
 # Monis
 Monis is a hyper-fast light-weight SSG written in Crystal.
+
 ## Build
 
+To build run `shards build`, if it asks you to run `shards update` you have to run with the `--ingore-crystal-version` flag because `front_matter` has not been updated to have crystal 1.0.0 in its `shards.yml`  
+The compiled binary will be in `/bin`
 
 ## File formating
 Template:
@@ -15,7 +18,7 @@ Hello and welcome!
 ```
 The frontmatter contains the permalink and the title, and the page content is after the frontmatter
 
-## File structure
+## File structure for sites
 `/content`: Anything here gets rendered  
 `/static`: These files just get copied over to `/out/static`  
 `/theme`: Currently only `index.html.js` gets used in this, but this is the Jinja2 template for the website.  

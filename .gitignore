@@ -1,8 +1,8 @@
-/docs
-/lib
-/bin
-/.shards
+docs
+lib
+bin
+.shards
 *.dwarf
-/content
-/static
-/out
+content
+static
+out
