@@ -1,0 +1,20 @@
+name: monis
+version: 0.1.0
+
+# authors:
+#   - name <email@example.com>
+
+description: |
+  Monis is a static site generator that I have built using markdown and jinja themes
+
+dependencies:
+  markd:
+    github: icyleaf/markd
+  crinja:
+    github: straight-shoota/crinja
+
+# development_dependencies:
+#   webmock:
+#     github: manastech/webmock.cr
+
+# license: MIT
