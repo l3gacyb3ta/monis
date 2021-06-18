@@ -11,8 +11,6 @@ dependencies:
     github: icyleaf/markd
   crinja:
     github: straight-shoota/crinja
-  front_matter:
-    github: chris-huxtable/front_matter.cr
 
 targets:
   monis:

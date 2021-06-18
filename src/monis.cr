@@ -1,4 +1,4 @@
-require "front_matter"
+require "./front_matter"
 require "crinja"
 require "markd"
 require "yaml"
