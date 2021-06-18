@@ -11,4 +11,4 @@ build monis: compile
 build install: install
 build clean: clean
 
-default install monis
+default monis

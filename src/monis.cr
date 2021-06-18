@@ -77,7 +77,7 @@ module Monis
   puts "Tranfering static content"
   if Dir.exists? "static"
     system "mkdir out/static"
-    system "cp static/* out/static"
+    system "cp -r static/* out/static"
   end
   if Dir.exists? "theme/static"
     if Dir.exists? "out/static"
@@ -85,7 +85,7 @@ module Monis
       system "mkdir out/static"
     end
 
-    system "cp theme/static/* out/static"
+    system "cp -r theme/static/* out/static"
   end
   puts "Static content moved"
 end

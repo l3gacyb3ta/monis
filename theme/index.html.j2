@@ -2,6 +2,8 @@
     <head>
         <title>{{ title }}</title>
         <link rel="stylesheet" href="/static/styles.css">
+        <script src="/static/js/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
     </head>
     <body>
         <div>{{ content | safe }}</div>
