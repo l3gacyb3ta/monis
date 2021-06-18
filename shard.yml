@@ -12,6 +12,7 @@ dependencies:
   crinja:
     github: straight-shoota/crinja
 
+
 targets:
   monis:
     main: src/monis.cr

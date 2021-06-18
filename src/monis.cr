@@ -5,7 +5,7 @@ require "yaml"
 
 # The main monis engine
 module Monis
-  VERSION = "0.1.0"
+  VERSION = "0.2.0"
 
   if Dir.exists? "out"
     puts "Cleaning old generation"
@@ -44,6 +44,8 @@ module Monis
 
       # Render the template HTML with our data
       rendered_page = template.render({"content" => content, "title" => title})
+
+
       # write out rendered_page
 
       # create directories for page
