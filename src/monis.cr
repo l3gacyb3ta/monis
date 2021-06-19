@@ -33,17 +33,26 @@ module Monis
 
     FrontMatter.open(filename) { |front_matter, content_io|
       data = YAML.parse front_matter
-      title = data["title"].as_s
       permalink = data["permalink"].as_s
 
       rawmd = content_io.gets_to_end
       content = Markd.to_html(rawmd)
 
+      # This allows for custom configs for themes.
+      configdata = {} of String => String
+
+      data.as_h.each do |item|
+        configdata[item[0].as_s] = item[1].as_s
+        # p! configdata
+      end
+
       # Do something with the front matter and content.
       # Parse the front matter as YAML, JSON or something else?
 
       # Render the template HTML with our data
-      rendered_page = template.render({"content" => content, "title" => title})
+      basicconfig = {"content" => content}
+      # p! basicconfig.merge(configdata)
+      rendered_page = template.render(basicconfig.merge(configdata))
 
 
       # write out rendered_page

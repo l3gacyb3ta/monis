@@ -17,3 +17,6 @@ bin: build
 test: build
 	$(CRYSTAL_BIN) spec
 	./bin/monis --all
+
+dev:
+	$(SHARDS_BIN) build -p
