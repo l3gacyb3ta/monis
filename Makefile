@@ -25,6 +25,5 @@ dev:
 
 docs: build
 	./monis
-	mkdir docs
 	cp -r ./out/* ./docs
 	
