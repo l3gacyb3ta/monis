@@ -2,8 +2,6 @@
 /bin
 /.shards
 *.dwarf
-content
 /static
 /out
-.ninja_log
 monis

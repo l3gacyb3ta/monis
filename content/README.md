@@ -1,3 +1,7 @@
+---
+title: "Readme!"
+permalink: "/index"
+---
 # Monis
 Monis is a hyper-fast light-weight SSG written in Crystal.
 
