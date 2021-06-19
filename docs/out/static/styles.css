@@ -1,0 +1,23 @@
+:root {
+    --highlight: beige;
+}
+
+body {
+    display: flex;
+    margin: 5rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+code {
+    background-color: var(--highlight);
+}
+
+pre {
+    width: 50%;
+    padding: 0.5rem;
+    background-color: var(--highlight);
+}

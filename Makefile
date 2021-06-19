@@ -2,10 +2,11 @@ CRYSTAL_BIN ?= crystal
 SHARDS_BIN ?= shards
 PREFIX ?= /usr/local
 SHARD_BIN ?= ../../bin
+THREADS ?= --threads=24
 CRFLAGS ?= -p --production
 
 build:
-	$(SHARDS_BIN) build $(CRFLAGS)
+	$(SHARDS_BIN) build $(CRFLAGS) $(THREADS)
 clean:
 	rm -f bin
 install: build
@@ -19,4 +20,10 @@ test: build
 	./bin/monis --all
 
 dev:
-	$(SHARDS_BIN) build -p
+	$(SHARDS_BIN) build -p $(THREADS)
+	mv ./bin/monis ./
+
+docs: build
+	./monis
+	cp -r ./out ./docs
+	
