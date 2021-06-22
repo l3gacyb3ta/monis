@@ -1,22 +1,48 @@
 require "./front_matter"
+require "option_parser"
+require "file_utils"
 require "crinja"
 require "markd"
 require "yaml"
 
 # The main monis engine
 module Monis
-  VERSION = "0.2.0"
+  VERSION = "0.4.0"
 
   if Dir.exists? "out"
     puts "Cleaning old generation"
-    system "rm -rf out"
+    FileUtils.rm "./out"
+  end
+
+  # if this flag is true, then create the directory structure, as well as a basic theme file.
+  _init = false
+
+  # # File structure for sites
+  # `/content`: Anything here gets rendered
+  # `/static`: These files just get copied over to `/out/static`
+  # `/theme`: Currently only `index.html.js` gets used in this, but this is the Jinja2 template for the website.
+  # `/theme/static`: These are static files for a theme
+  # `/out`: This is the output of the generator once it has been run !!DONT STORE ANYTHING IMPORTANT HERE IT GETS WIPED ON EACH RUN!!
+
+  OptionParser.parse do |parser|
+    parser.banner = "Monis CLI"
+    parser.on "init", "create the basic folder structure." do
+      _init = true
+    end
+  end
+
+  if _init
+    FileUtils.mkdir ["content", "theme", "theme/static", "static"]
+    File.write "theme/index.html.j2", "{{content}}"
+    # quit the program
+    exit
   end
 
   # ---------------- Jinja template engine setup ----------------
   env = Crinja.new
   env.loader = Crinja::Loader::FileSystemLoader.new("theme/")
 
-  rawfiles = Dir.glob("content/**/*") # Files that are under content
+  rawfiles = Dir.glob "content/**/*" # Files that are under content
   files = [] of String                # An empty Array of filenames without directories
 
   rawfiles.each do |filename|
@@ -26,7 +52,7 @@ module Monis
   end
 
   content = "Nothing yet!"
-  template = env.get_template("index.html.j2")
+  template = env.get_template "index.html.j2"
 
   files.each do |filename|
     puts "Generating HTML for " + filename
@@ -36,7 +62,7 @@ module Monis
       permalink = data["permalink"].as_s
 
       rawmd = content_io.gets_to_end
-      content = Markd.to_html(rawmd)
+      content = Markd.to_html rawmd
 
       # This allows for custom configs for themes.
       configdata = {} of String => String
@@ -54,7 +80,6 @@ module Monis
       # p! basicconfig.merge(configdata)
       rendered_page = template.render(basicconfig.merge(configdata))
 
-
       # write out rendered_page
 
       # create directories for page
@@ -67,17 +92,17 @@ module Monis
           recreateddir = "out" + subs[0..count].join('/')
           if Dir.exists? recreateddir
           else
-            system "mkdir " + recreateddir
+            FileUtils.mkdir recreateddir
           end
         end
         count = count + 1
       end
 
       if Dir.exists? "out"
-        File.write("out" + permalink + ".html", rendered_page)
+        File.write "out" + permalink + ".html", rendered_page
       else
-        system "mkdir out"
-        File.write("out" + permalink + ".html", rendered_page)
+        FileUtils.mkdir "out"
+        File.write "out" + permalink + ".html", rendered_page
       end
       puts "Generated " + permalink + ".html"
     }
@@ -87,16 +112,16 @@ module Monis
 
   puts "Tranfering static content"
   if Dir.exists? "static"
-    system "mkdir out/static"
-    system "cp -r static/* out/static"
+    FileUtils.mkdir "out/static"
+    FileUtils.cp_r "static/*", "out/static"
   end
   if Dir.exists? "theme/static"
     if Dir.exists? "out/static"
     else
-      system "mkdir out/static"
+      FileUtils.mkdir "out/static"
     end
 
-    system "cp -r theme/static/* out/static"
+    FileUtils.cp_r "theme/static/*", "out/static"
   end
   puts "Static content moved"
 end
