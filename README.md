@@ -5,7 +5,7 @@ Under my benchmarks (rendering this readme a 100 times), a large site can be gen
 
 ## Build
 
-To build run `make`, then to install `make install`.  
+To build run `make`, then to install `sudo make install`.  
 To build the docs, run `make docs`
 
 ## File formating
