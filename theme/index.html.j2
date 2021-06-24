@@ -1,9 +1,23 @@
 <html>
     <head>
+        <!-- Primary Meta Tags -->
         <title>{{ title }}</title>
-        <link rel="stylesheet" href={{ prefix + "/static/styles.css" }}>
-        <script src="https://unpkg.com/@highlightjs/cdn-assets@11.0.1/highlight.min.js"></script>
-        <script>hljs.highlightAll();</script>
+        <meta name="title" content="{{ title }}">
+        <meta name="description" content="{{ config.description }}">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{config.url}}">
+        <meta property="og:title" content="{{ title }}">
+        <meta property="og:description" content="{{ config.description }}">
+        <meta property="og:image" content="{{ config.image }}">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="{{config.url}}">
+        <meta property="twitter:title" content="{{ title }}">
+        <meta property="twitter:description" content="{{ config.description }}">
+        <meta property="twitter:image" content="{{ config.image }}">
         <meta name="description" content="{{ config.description }}">
         <meta name="author" content="{{ config.author }}">
     </head>

@@ -1,9 +1,11 @@
 ---
-title: "Readme!"
+title: "Monis"
 permalink: "/index"
 prefix: "/monis"
 ---
 # Monis
+![Artwork](https://cloud-kk3xz9mty-hack-club-bot.vercel.app/0untitled-artwork.png)
+
 Monis is a hyper-fast light-weight SSG written in Crystal.
 
 Under my benchmarks (rendering this readme a 100 times), a large site can be generated in less then 25ms!
