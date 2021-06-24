@@ -49,6 +49,7 @@ Note: the `title` config option used to be hard-coded into monis, but now depend
 `/theme`: Currently only `index.html.js` gets used in this, but this is the Jinja2 template for the website.  
 `/theme/static`: These are static files for a theme
 `/out`: This is the output of the generator once it has been run !!DONT STORE ANYTHING IMPORTANT HERE IT GETS WIPED ON EACH RUN!!  
+`/config.yml`: Anything in here gets passed to the config attribute in the jinja template.
 
 ## Contributing
 

@@ -4,13 +4,15 @@
         <link rel="stylesheet" href=/monis/static/styles.css>
         <script src="https://unpkg.com/@highlightjs/cdn-assets@11.0.1/highlight.min.js"></script>
         <script>hljs.highlightAll();</script>
+        <meta name="description" content=Monis, a modern hyper-fast SSG.>
+        <meta name="author" content=Raleigh Wise>
     </head>
     <body>
         <div><h1>Monis</h1>
 <p>Monis is a hyper-fast light-weight SSG written in Crystal.</p>
 <p>Under my benchmarks (rendering this readme a 100 times), a large site can be generated in less then 25ms!</p>
 <h2>Build</h2>
-<p>To build run <code>make</code>, then to install <code>make install</code>.<br />
+<p>To build run <code>make</code>, then to install <code>sudo make install</code>.<br />
 To build the docs, run <code>make docs</code></p>
 <h2>File formating</h2>
 <p>Template:</p>
@@ -48,7 +50,8 @@ Hello and welcome!
 <code>/static</code>: These files just get copied over to <code>/out/static</code><br />
 <code>/theme</code>: Currently only <code>index.html.js</code> gets used in this, but this is the Jinja2 template for the website.<br />
 <code>/theme/static</code>: These are static files for a theme
-<code>/out</code>: This is the output of the generator once it has been run !!DONT STORE ANYTHING IMPORTANT HERE IT GETS WIPED ON EACH RUN!!</p>
+<code>/out</code>: This is the output of the generator once it has been run !!DONT STORE ANYTHING IMPORTANT HERE IT GETS WIPED ON EACH RUN!!<br />
+<code>/config.yml</code>: Anything in here gets passed to the config attribute in the jinja template.</p>
 <h2>Contributing</h2>
 <ol>
 <li>Fork it (<a href="https://github.com/your-github-user/monis/fork">https://github.com/your-github-user/monis/fork</a>)</li>

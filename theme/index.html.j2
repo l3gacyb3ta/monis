@@ -4,6 +4,8 @@
         <link rel="stylesheet" href={{ prefix + "/static/styles.css" }}>
         <script src="https://unpkg.com/@highlightjs/cdn-assets@11.0.1/highlight.min.js"></script>
         <script>hljs.highlightAll();</script>
+        <meta name="description" content={{ config.description }}>
+        <meta name="author" content={{ config.author }}>
     </head>
     <body>
         <div>{{ content | safe }}</div>

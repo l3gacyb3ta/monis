@@ -11,7 +11,7 @@ module Monis
 
   if Dir.exists? "out"
     puts "Cleaning old generation"
-    FileUtils.rm "./out"
+    FileUtils.rm_rf "./out"
   end
 
   # if this flag is true, then create the directory structure, as well as a basic theme file.
@@ -51,6 +51,19 @@ module Monis
     end
   end
 
+  if File.exists? "config.yml"
+    # Read config yaml from the `config.yml` file
+    configfiledata = {} of String => String
+    data = YAML.parse File.new("config.yml").gets_to_end
+
+    data.as_h.each do |item|
+      configfiledata[item[0].as_s] = item[1].as_s
+    end
+  else
+    STDERR.puts "No config.yml detected in the current directory!"
+    exit 1
+  end
+
   content = "Nothing yet!"
   template = env.get_template "index.html.j2"
 
@@ -65,10 +78,10 @@ module Monis
       content = Markd.to_html rawmd
 
       # This allows for custom configs for themes.
-      configdata = {} of String => String
+      frontdata = {} of String => String
 
       data.as_h.each do |item|
-        configdata[item[0].as_s] = item[1].as_s
+        frontdata[item[0].as_s] = item[1].as_s
         # p! configdata
       end
 
@@ -76,9 +89,9 @@ module Monis
       # Parse the front matter as YAML, JSON or something else?
 
       # Render the template HTML with our data
-      basicconfig = {"content" => content}
+      basicconfig = {"content" => content, "config" => configfiledata}
       # p! basicconfig.merge(configdata)
-      rendered_page = template.render(basicconfig.merge(configdata))
+      rendered_page = template.render(basicconfig.merge(frontdata))
 
       # write out rendered_page
 
@@ -113,7 +126,7 @@ module Monis
   puts "Tranfering static content"
   if Dir.exists? "static"
     FileUtils.mkdir "out/static"
-    FileUtils.cp_r "static/*", "out/static"
+    FileUtils.cp_r "static", "out/static"
   end
   if Dir.exists? "theme/static"
     if Dir.exists? "out/static"
@@ -121,7 +134,7 @@ module Monis
       FileUtils.mkdir "out/static"
     end
 
-    FileUtils.cp_r "theme/static/*", "out/static"
+    FileUtils.cp_r "theme/static", "out/static"
   end
   puts "Static content moved"
 end
